@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="pl" lang="pl" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="keywords" content="język programowania, języki programowania, język C, java, język C++"/>
+<meta name="description" content="Języki programowania - wykłady poświęcone podstawom języków C, C++, Java.        Stanowią przygotowanie do programowania obiektowego w Javie i C++."/>
+<meta name="author" content="Jakub Neumann"/>
+<link rel="stylesheet" type="text/css" href="jezykiprog.css"/>
+<title>Języki programowania</title>
+<script type="text/javascript">
+                    
+          function widocznosc(numer) {          
+            if (document.getElementById("s" + numer).style.display == "none") {
+              document.getElementById("s" + numer).style.display = "block";
+            } 
+            else {
+              document.getElementById("s" + numer).style.display = "none";
+            }
+          }
+				</script>
+</head>
+<body>
+<div id="container">
+<div id="baner">
+<div id="pagetitle">
+							Języki programowania:
+							Budowanie programu wykonywalnego w C</div>
+</div>
+<div id="navbar">
+<ul>
+<li class="sep">
+<a href="01wstep.html">Wstęp</a>
+</li>
+<li class="sep">
+<a href="02budowanieC.html">
+									Budowanie programów w języku C
+                </a>
+</li>
+<li class="sep">
+<a href="03typy.html">
+									Struktura programu i podstawowe typy danych
+                </a>
+</li>
+<li class="sep">
+<a href="04zmienne.html">Zmienne, stałe i ich zasięg, literały</a>
+</li>
+<li class="sep">
+<a href="05operatory.html">Operatory</a>
+</li>
+<li class="sep">
+<a href="06sterowanie.html">
+									Sterowanie wykonaniem programu
+                </a>
+</li>
+<li class="sep">
+<a href="07funkcje.html">Funkcje</a>
+</li>
+<li class="sep">
+<a href="08zlozonetypy.html">Złożone typy danych, struktury, unie</a>
+</li>
+<li class="sep">
+<a href="09wskazniki.html">
+									Wskaźniki, zarządzanie pamięcią
+                </a>
+</li>
+<li class="sep">
+<a href="10funkcjewskazniki.html">
+									Funkcje i wskaźniki
+								</a>
+</li>
+</ul>
+</div>
+<div id="zcontent">
+<div id="content">
+<a class="tytul" onclick="widocznosc(1);">
+        Schemat budowania programu
+      </a>
+<div class="slajd" style="display: none" id="s1">
+        <img src="pictures/sbudowanieC.jpg" alt="Schemat budowania programu wykonywalnego"/>
+      </div>
+<a class="tytul" onclick="widocznosc(2);">
+        Składniki - pliki nagłówkowe
+      </a>
+<div class="slajd" style="display: none" id="s2">
+        Pliki nagłówkowe *.h:
+        <ul>
+          <li>
+            zawierają
+            <strong>deklaracje</strong>
+            funkcji i zmiennych, własne typy danych, definicje stałych,
+            makra itp.
+          </li>
+          <li>
+            &lt;plik.h&gt; - zawierają informacje (parz wyżej) o
+            obiektach dostępnych w całym systemie, pliki te położone są
+            w ustalonych katalogach np. /include /usr/include
+          </li>
+          <li>
+            "plik.h" - zawierające informacje o obiektach zdefiniowanych
+            na potrzeby programu, pliki te położone w dowolnych
+            miejscach, najczęściej bieżący (pod)katalog
+          </li>
+        </ul>
+        <div class="uwaga">
+          Uwaga! Częsty błąd polega na utożsamianiu plików nagłówkowych
+          z bibliotekami zawierającymi funkcje. W plikach nagłówkowych
+          znajdują się jedynie sygnatury funkcji (nazwa, typ zwracanej
+          wartości, typy i ilośc argumentów) a nie kod (ciało) funkcji!
+        </div>
+      </div>
+<a class="tytul" onclick="widocznosc(3);">
+        Składniki - pliki źródłowe i obiektowe
+      </a>
+<div class="slajd" style="display: none" id="s3">
+        Pliki źródłowe *.c
+        <ul>
+          <li>
+            definicje funkcji, zmienne statyczne (lokalne dla pliku) i
+            globalne
+          </li>
+          <li>
+            zazwyczaj jeden plik z funkcją main(), od której rozpoczyna
+            się wykonywanie programu
+          </li>
+        </ul>
+        Pliki obiektowe *.o (Linux) lub *.obj (Windows) (zwane też
+        plikami relokowanymi)
+        <ul>
+          <li>
+            tymczasowe (zazwyczaj) pliki będące efektem kompilacji pliku
+            źródłowego
+          </li>
+          <li>
+            są plikami wejściowymi dla linkera (konsolidatora) (patrz
+            dalszy slajd), który tworzy z nich program wykonywalny lub
+            bibliotekę
+          </li>
+        </ul>
+        <div class="uwaga">
+          Uwaga! Używana tutaj nazwa
+          <em>obiektowe</em>
+          nie ma nic wspólnego ze pojęciami z zakresu programowania
+          obiektowego, zbieżność jest przypadkowa
+        </div>
+
+      </div>
+<a class="tytul" onclick="widocznosc(4);">
+        Etapy budowania programu
+      </a>
+<div class="slajd" style="display: none" id="s4">
+        <img src="pictures/sbudowanieC_etapy.jpg" alt="Schemat budowania programu wykonywalnego"/>
+      </div>
+<a class="tytul" onclick="widocznosc(5);">Etapy - preprocesor</a>
+<div class="slajd" style="display: none" id="s5">
+        <ul>
+          <li>
+            preprocesor jest prostym programem, operującym na danych
+            tekstowych, uruchamianym automatycznie i działającym przed
+            właściwą kompilacją
+          </li>
+          <li>
+            intrukcje preprocesora to
+            <strong>dyrektywy</strong>
+          </li>
+          <li>
+            <span class="kod">#inlcude &lt;stdio.h&gt;</span>
+            dyrektywa dołączająca zawartość danego pliku (porównaj uwagę
+            na slajdzie do plików nagłówkowych)
+          </li>
+          <li>
+            <span class="kod">#define PI 3.14</span>
+            dyrektywa "podmieniająca" ciąg znaków PI na ciąg znaków 3.14
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(6);">
+        Etapy - kompilator i linker
+      </a>
+<div class="slajd" style="display: none" id="s6">
+        <ul>
+          <li>
+            kompilator zamienia kod źródłowy (potraktowany wcześniej
+            preprocesorem) na kod maszynowy, tworzy pliki obiektowe
+          </li>
+          <li>
+            linker (konsolidator) z plików obiektowych tworzy pliki
+            wykonywalne (dla danej maszyny) lub biblioteki
+          </li>
+        </ul>
+        <div class="uwaga">
+          Bardzo często obie te operacje wywoływane są jednym poleceniem
+          kompilatora, który automatycznie uruchamia program łączący.
+          Pliki obiektowe są automatycznie usuwane po utworzeniu pliku
+          wykonywalnego lub biblioteki.
+        </div>
+
+      </div>
+<a class="tytul" onclick="widocznosc(7);">
+        Tradycyjnie - HelloWorld.c
+      </a>
+<div class="slajd" style="display: none" id="s7">
+        <pre class="kod">
+        #include &lt;stdio.h&gt;
+        
+        int main() {
+        
+          puts("Hello World!");
+          
+          return 0;
+        
+        }
+        </pre>
+      </div>
+<a class="tytul" onclick="widocznosc(8);">
+        Budujemy HelloWorld - polecenia
+      </a>
+<div class="slajd" style="display: none" id="s8">
+        <ul>
+          <li>
+            <span class="kod">gcc -c HelloWorld.c</span>
+            - kompilacja
+          </li>
+          <li>
+            <span class="kod">gcc HelloWorld.o -o hello</span>
+            - łączenie do pliku wykonywalnego o nazwie hello
+          </li>
+          <li>
+            <span class="kod">./hello</span>
+            - uruchomienie
+          </li>
+        </ul>
+        To samo prościej:
+        <ul>
+          <li>
+            <span class="kod">gcc HelloWorld.c -o hello</span>
+            - kompilacja + łączenie razem
+          </li>
+        </ul>
+        <div class="uwaga">
+          Bardzo pożytecznym przełącznikiem kompilatora jest
+          informowanie o ostrzeżeniach (and. warnings), zalecamy
+          kompilację z opcją: -Wall :
+          <br/>
+          <span class="kod">gcc -Wall HelloWorld.c -o hello</span>
+        </div>
+      </div>
+<a class="tytul" onclick="widocznosc(9);">
+        Wejście i wyjścia programu
+      </a>
+<div class="slajd" style="display: none" id="s9">
+        Każdy program w C podczas swego działania otrzymuje od systemu
+        operacyjnego, dostęp do trzech standardowych strumieni:
+        <ul>
+          <li>
+            <strong>stdin</strong>
+            standardowe wejście (domyślnie klawiatura)
+          </li>
+          <li>
+            <strong>stdout</strong>
+            standardowe wyjście (domyślnie ekran)
+          </li>
+          <li>
+            <strong>stderr</strong>
+            wyjście dla błędów (domyślnie ekran)
+          </li>
+        </ul>
+        <ul>
+          <li>
+            Standardowe operacje wejścia / wyjścia (standard input
+            output, stdio) używają tych strumieni domyślnie (funkcja
+            puts)
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(10);">
+        Wprowadzanie danych z klawiatury
+      </a>
+<div class="slajd" style="display: none" id="s10">
+        <pre class="kod">
+#include &lt;stdio.h&gt;
+        
+int main() {
+ int n1, n2;
+ float suma;
+ printf("Pierwsza liczba: ");
+ scanf("%d", &amp;n1);
+ printf("Druga liczba: ");
+ scanf("%d", &amp;n2);
+ suma =  n1 + n2;
+ printf("Wynik: %f\n", suma/2);
+ return 0;       
+}
+        </pre>
+      </div>
+<a class="tytul" onclick="widocznosc(11);">
+        Formatowanie wydruku liczb
+      </a>
+<div class="slajd" style="display: none" id="s11">
+        Przykładowy wynik:
+        <pre class="kod">
+    Pierwsza liczba: 12
+    Druga liczba: 8
+    Wynik: 10.000000
+        </pre>
+        Jak uzyskać dokładnośc (na wydruku) 2 miejsc dziesiętnych:
+        <div class="kod">printf("Wynik %.2f\n", suma/2);</div>
+
+      </div>
+<a class="tytul" onclick="widocznosc(12);">
+        Wyjście formatowane - printf
+      </a>
+<div class="slajd" style="display: none" id="s12">
+        <pre class="kod">
+#include &lt;stdio.h&gt;
+        
+int main() {
+ double x = .0123456789;
+ int n = 12345;
+
+ printf("Zwykły tekst\n\n);
+ printf("Liczba całkowita: %d\n\n", n);
+ printf("Liczba double: %g\n", x);
+ printf("Liczba double: %f\n", x);
+ printf("Liczba double: %e\n\n", x);
+
+ printf("Dwie liczby: n (%d) oraz x (%g)\n", n, x);
+ 
+ return 0;  
+}
+        </pre>
+      </div>
+<a class="tytul" onclick="widocznosc(13);">
+        Wejście formatowane - scanf (1)
+      </a>
+<div class="slajd" style="display: none" id="s13">
+        <ul>
+          <li>wczytuje dane ze standardowego wyjścia</li>
+          <li>
+            dane są interpretowane zgodnie ze specyfikacją podaną w
+            pierwszym argumencie funkcji
+          </li>
+          <li>
+            wczytywane wartości są zpamiętywane w miejscach opisanych
+            przez pozostałe argumenty.
+            <div class="uwaga">
+              Wszystkie "miejsca" muszą być określone za pomocą
+              wskaźników. Częsty bład polega na umieszczaniu zmiennych
+              zamiast wskaźników do nich.
+            </div>
+          </li>
+          <li>
+            <span class="kod">
+              scanf("specyfikacja", &amp;x1,...,&amp;n);
+            </span>
+          </li>
+          <li>
+            <span class="kod">&amp;x</span>
+            - wskaźnik do zmiennej x
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(14);">
+        Wejście formatowane - scanf (2)
+      </a>
+<div class="slajd" style="display: none" id="s14">
+        <pre class="kod">
+#include &lt;stdio.h&gt;
+        
+int main() {
+ double x;
+ int dd, mm, rr;
+
+ /* Wczytywanie liczby typu double */
+ printf("Liczba:");
+ scanf("%lf", &amp;x);
+ 
+ /* Wczytywanie daty */
+ printf("Dzisiejsza data: ");
+ scanf("%d/%d/%d", &amp;dd, &amp;mm, &amp;rr);
+ return 0;  
+}
+        </pre>
+      </div>
+<a class="tytul" onclick="widocznosc(15);">
+        Wyjście formatowane - scanf (3)
+      </a>
+<div class="slajd" style="display: none" id="s15">
+        Funkcja scanf zwraca liczbę szczęśliwie wczytanych i
+        przypisanych danych wejściowych.
+        <pre class="kod">
+#include &lt;stdio.h&gt;
+        
+int main() {
+ int dd, mm, rr;
+ int rez;
+ printf("Dzisiejsza data: ");
+ rez = scanf("%d/%d/%d", &amp;dd, &amp;mm, &amp;rr);
+ 
+ if (rez != 3 ) {
+   puts("Niepoprawny format daty!");
+ }
+ return 0; 
+}
+        </pre>
+      </div>
+</div>
+</div>
+<div id="footer">
+						Notatki do wykładu: Języki programowania; Jakub
+						Neumann;
+          </div>
+</div>
+</body>
+</html>
