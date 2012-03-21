@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="pl" lang="pl" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="keywords" content="język programowania, języki programowania, język C, java, język C++"/>
+<meta name="description" content="Języki programowania - wykłady poświęcone podstawom języków C, C++, Java.        Stanowią przygotowanie do programowania obiektowego w Javie i C++."/>
+<meta name="author" content="Jakub Neumann"/>
+<link rel="stylesheet" type="text/css" href="jezykiprog.css"/>
+<title>Języki programowania</title>
+<script type="text/javascript">
+                    
+          function widocznosc(numer) {          
+            if (document.getElementById("s" + numer).style.display == "none") {
+              document.getElementById("s" + numer).style.display = "block";
+            } 
+            else {
+              document.getElementById("s" + numer).style.display = "none";
+            }
+          }
+				</script>
+</head>
+<body>
+<div id="container">
+<div id="baner">
+<div id="pagetitle">
+							Języki programowania:
+							
+      Struktura programu (proceduralnego) i podstawowe typy danych
+    </div>
+</div>
+<div id="navbar">
+<ul>
+<li class="sep">
+<a href="01wstep.html">Wstęp</a>
+</li>
+<li class="sep">
+<a href="02budowanieC.html">
+									Budowanie programów w języku C
+                </a>
+</li>
+<li class="sep">
+<a href="03typy.html">
+									Struktura programu i podstawowe typy danych
+                </a>
+</li>
+<li class="sep">
+<a href="04zmienne.html">Zmienne, stałe i ich zasięg, literały</a>
+</li>
+<li class="sep">
+<a href="05operatory.html">Operatory</a>
+</li>
+<li class="sep">
+<a href="06sterowanie.html">
+									Sterowanie wykonaniem programu
+                </a>
+</li>
+<li class="sep">
+<a href="07funkcje.html">Funkcje</a>
+</li>
+<li class="sep">
+<a href="08zlozonetypy.html">Złożone typy danych, struktury, unie</a>
+</li>
+<li class="sep">
+<a href="09wskazniki.html">
+									Wskaźniki, zarządzanie pamięcią
+                </a>
+</li>
+<li class="sep">
+<a href="10funkcjewskazniki.html">
+									Funkcje i wskaźniki
+								</a>
+</li>
+</ul>
+</div>
+<div id="zcontent">
+<div id="content">
+<a class="tytul" onclick="widocznosc(1);">
+        Struktura programu w C (ogólnie)
+      </a>
+<div class="slajd" style="display: none" id="s1">
+        <ul>
+          <li>
+            program w języku C (i innym proceduralnym) jest najogólnej
+            mówiąc zbiorem funkcji (procedur), funkcje mogą zajmować
+            kilka plików źródłowych
+          </li>
+          <li>
+            funkcja jest najogólniej mówiąc ciągiem instrukcji (ang.
+            statements) otoczonych nawiasami
+            <span class="kod">{ ... }</span>
+          </li>
+          <li>
+            instrukcje to m.in. wywołanie funkcji, operacje
+            arytmetyczne, przypisywanie wartości zmiennej
+          </li>
+          <li>
+            funkcja main() jest szczególna: od jej wywołania i
+            wykonywania jej instrukcji rozpoczyna się działanie programu
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(2);">
+        Struktura programu w C cd.
+      </a>
+<div class="slajd" style="display: none" id="s2">
+        <ul>
+          <li>
+            w ogólnej strukturę programu, oprócz funkcji możemy
+            wyróżnić: deklaracje zmiennych (globalnych, lokalnych pliku
+            źródłowego), definicje typów (np. struktur), dyrektywy
+            preprocesora (tylko początkowe linie)
+          </li>
+          <li>
+            oprócz instrukcji w funkcji możemy wyróżnić: deklaracje
+            zmiennych lokalnych funkcji, instrukcje sterujące wykonaniem
+            programu
+          </li>
+          <li>instrukcje mogą występować tylko w funkcjach(!)</li>
+          <li>
+            <strong>komentarze</strong>
+            - napisy niewidoczne dla kompilatora, widoczne dla
+            programisty (szczególnie jego następcy, który musi "na
+            wczoraj" poprawić kod). Komentarze umieszczamy między parami
+            znaków /* i */. Dopuszcza się również komentarze
+            rozciągające się od znaków // do końca lini
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(3);">Zmienne w programie</a>
+<div class="slajd" style="display: none" id="s3">
+        <ul>
+          <li>zmienne są "pojemnikami", przechowującymi dane</li>
+          <li>
+            dane mogą reprezentować zarówno pojedyńcze wartości np.
+            liczbę, literę jak i mnogości np. ciąg liczb (tablice) lub
+            imię, nazwisko i rok urodzenia traktowane łącznie
+            (struktury)
+          </li>
+          <li>
+            o tym jakiego rodzaju dane będzie przechowywała zmienna
+            (czyli m.in. ile miejsca w pamięci będzie przeznaczone na
+            przechowywanie danych) określa
+            <strong>typ</strong>
+            zmiennej
+          </li>
+          <li>
+            w językach C, C++, Java dla każdej zmiennej musi być
+            określony jej typ
+          </li>
+          <li>
+            typ zmiennej określamy w
+            <strong>deklaracjach</strong>
+            np.
+            <br/>
+            <span class="kod">int numer;</span>
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(4);">
+        Typy danych: liczby całkowite
+      </a>
+<div class="slajd" style="display: none" id="s4">
+        Typy reprezentujące liczby całkowite:
+        <ul>
+          <li>
+            <strong>int</strong>
+            - podstawowy typ całkowity
+          </li>
+          <li>
+            <strong>short</strong>
+            oraz
+            <strong>long</strong>
+            - modyfikatory dla typu int oznaczające małe i duże liczby
+            całkowite
+          </li>
+          <li>
+            <strong>signed</strong>
+            oraz
+            <strong>unsigned</strong>
+            - modyfikatory dla powyższych typów oznaczające liczbę ze
+            znakiem i bez znaku
+          </li>
+        </ul>
+        Przykłady deklaracji:
+        <ul>
+          <li>
+            <span class="kod">long x;</span>
+            // nie musimy pisać "int"
+          </li>
+          <li>
+            <span class="kod">unsigned short y;</span>
+            // domyślnie liczby są "signed"
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(5);">Typy danych: znaki</a>
+<div class="slajd" style="display: none" id="s5">
+        <ul>
+          <li>
+            <strong>char</strong>
+            - podstawowy typ znakowy, co najmniej 1 bajt, do
+            przechowywania znaków ASCII, ISO8859-2, kodowanie
+            jednobajtowe
+            <ul>
+              <li>
+                <span class="kod">char litera = 'Ę';</span>
+              </li>
+              <li>
+                <span class="kod">char litera = '\312';</span>
+                zapis oktalny (ósemkowy) literki Ę w kodowaniu ISO8859-2
+              </li>
+              <li>
+                <span class="kod">char litera = '\xCA';</span>
+                to samo hexadecymalnie
+              </li>
+            </ul>
+          </li>
+          <li>
+            <strong>wchar_t</strong>
+            "wide characters", kodowanie wielobajtowe, Unicode, UTF-8
+          </li>
+          <li>
+            generalnie na typ znakowy można traktować jak typ całkowity
+            przechowujący "kod" znaku przy zadanym kodowaniu
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(6);">
+        Zakresy dla liczb całkowitych
+      </a>
+<div class="slajd" style="display: none" id="s6">
+        <ul>
+          <li>
+            język C: od implementacji języka wymaga się podania
+            maksymalnej i minimalnej wartości liczbowej dla danego typu.
+            Limity całkowite określone w pliku
+            <span class="kod">&lt;limits.h&gt;</span>
+          </li>
+          <li>
+            Java: standard określa dokładnie ile bitów, jakie zakresy
+            dla jakich typów, brak słów kluczowych "signed" i
+            "unsigned". Szczegóły na slajdach z Java
+          </li>
+          <li>
+            ciekawostka: typy long int oraz int na maszynach 32 bitowych
+            zwykle maja takie same zakresy a na maszynach 16 bitowych
+            typy short int i int
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(7);">
+        Przykładowe zakresy liczb całkowitych
+      </a>
+<div class="slajd" style="display: none" id="s7">
+        <pre style="font-size: 22px" class="kod">
+#include &lt;stdio.h&gt;
+#include &lt;limits.h&gt;
+
+int main(){
+  printf("char: [%d, %d]\n", CHAR_MIN, CHAR_MAX);
+  printf("short: [%d, %d]\n", SHRT_MIN, SHRT_MAX);
+  printf("int: [%d, %d]\n", INT_MIN, INT_MAX);
+  printf("long: [%d, %d]\n", LONG_MIN, LONG_MAX);
+  return 0;
+}
+Na wyjściu z programu otrzymujemy:     
+  char: [-128, 127]
+  short: [-32768, 32767]
+  int: [-2147483648, 2147483647]
+  long: [-2147483648, 2147483647]       
+        </pre>
+      </div>
+<a class="tytul" onclick="widocznosc(8);">
+        Typy reprezentujące liczby zmiennopozycyjne
+      </a>
+<div class="slajd" style="display: none" id="s8">
+        <ul>
+          <li>
+            <span class="kod">float</span>
+            - pojedyńcza precyzja
+          </li>
+          <li>
+            <span class="kod">double</span>
+            - podwójna precyzja
+          </li>
+          <li>
+            <span class="kod">long double</span>
+            - rozszerzona precyzja
+          </li>
+          <li>
+            precyzję można potocznie rozumieć jako "ilość cyfr", którą
+            liczba może zawierać
+          </li>
+          <li>
+            domyślnie liczba zmiennopozycyjna, która nie ma przyrostka
+            f,F (dla float) lub l,L (dla long double) jest "double"
+            <br/>
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(9);">
+        Przykładowe zakresy liczb zmiennopozycyjnych
+      </a>
+<div class="slajd" style="display: none" id="s9">
+        <pre style="font-size: 22px; margin: 2px;" class="kod">
+#include &lt;stdio.h&gt;
+#include &lt;float.h&gt;
+
+int main(){
+printf("radix: %d\n", FLT_RADIX);
+printf("float: %d radix digits\n", FLT_MANT_DIG);
+printf("\t [%g, %g]\n", FLT_MIN, FLT_MAX);
+printf("double: %d radix digits\n", DBL_MANT_DIG);
+printf("\t [%g, %g]\n", DBL_MIN, DBL_MAX);
+printf("long double: %d radix digits\n", LDBL_MANT_DIG);
+printf("\t [%Lg, %Lg]\n", LDBL_MIN, LDBL_MAX);
+
+return 0;
+}
+radix: 2
+float: 24 radix digits
+         [1.17549e-38, 3.40282e+38]
+double: 53 radix digits
+         [2.22507e-308, 1.79769e+308]
+long double: 64 radix digits
+         [3.3621e-4932, 1.18973e+4932]    
+        </pre>
+      </div>
+<a class="tytul" onclick="widocznosc(10);">Dwie arytmetyki w C</a>
+<div class="slajd" style="display: none" id="s10">
+        <ul>
+          <li>
+            arytmetyka
+            <strong>całkowitoliczbowa</strong>
+            - "obcina" wyniki operacji arytmetycznych do wartości
+            całkowitych, np.
+            <br/>
+            <span class="kod">7 / 3 == 2</span>
+          </li>
+          <li>
+            arytmetyka
+            <strong>zmiennopozycyjne</strong>
+            - zaaokrągla wyniki operacji arytmetycznych, gdyż dokładny
+            wynik może nie należeć do zbioru liczb reprezentowanych na
+            danej platformie; sposób zaokrąglania również zależy od
+            platformy
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(11);">Błędy reprezentacji</a>
+<div class="slajd" style="display: none" id="s11">
+        Nie wszystkie wartości ułamkowe mogą być reprezentowane
+        dokładnie. Uwaga na
+        <strong>porównywanie</strong>
+        !!!
+        <pre class="kod">
+#include &lt;stdio.h&gt;
+        
+int main() {
+ double x = .01;
+ if ( x * 100 == 1.0 ) {
+   puts("Jasne że tak!");
+ }
+ else {
+  puts("Niemożliwe!");
+ }
+ return 0;
+}
+        </pre>
+      </div>
+<a class="tytul" onclick="widocznosc(12);">Brakujące liczby</a>
+<div class="slajd" style="display: none" id="s12">
+        <pre class="kod">
+#include &lt;stdio.h&gt;
+#include &lt;limits.h&gt;
+
+int main(){
+
+  float x = ULONG_MAX; /* 4 294 967 295 */
+  double y = ULONG_MAX;
+  long double z = ULONG_MAX;
+
+  printf("%f\n%f\n%Lf\n",x,y,z);
+  return 0;
+}        </pre>
+      </div>
+<a class="tytul" onclick="widocznosc(13);">Promocje</a>
+<div class="slajd" style="display: none" id="s13">
+        <ul>
+          <li>
+            wszystkie operacje całkowitoliczbowe używają arytmetyki na
+            typach int lub long
+          </li>
+          <li>
+            typ wyniku operacji arytmetycznej jest dostosowywany do typu
+            "największego" jej argumentu
+            <ul>
+              <li>
+                mniejsze argumenty są automatycznie
+                <strong>promowane</strong>
+                do większych
+              </li>
+              <li>
+                promocja ma charakter tymczasowy, na potrzeby operacji,
+                ogólnie typ zmiennej się nie zmienia
+              </li>
+              <li>
+                jeśli którykolwiek z argumentow jest typu long double,
+                to inne zostają promowane do long double
+              </li>
+              <li>
+                w przeciwnym wypadku, jeśli którykolwiek z argumentów
+                jest typu double to pozostałe są promowane do double
+                (również całkowite)
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(14);">Konwersje</a>
+<div class="slajd" style="display: none" id="s14">
+        <ul>
+          <li>
+            jeżeli wynik operacji spróbujemy zapamiętać w zmiennej
+            mniejszego typu to dokonana zostanie automatyczna
+            <strong>konwersja</strong>
+          </li>
+          <li>tego typu sytuacje są potencjalnie niebezpieczne!!!</li>
+          <li>
+            kompilator może ostrzegać (ale nie musi) o miejscach
+            występowania automatycznej konwersji
+            <div class="uwaga">
+              Zgodnie ze standardem języka wynik konwersji jest
+              <strong>niezdefiniowany</strong>
+              jeśli wynik nie "zmieści" się w mniejszym typie
+            </div>
+          </li>
+          <li>
+            w języku Java wszystkie konwersje zawężające typ muszą być
+            <strong>jawne</strong>
+            tzn. nieautomatyczne za pomocą rzutowania
+          </li>
+        </ul>
+      </div>
+<a class="tytul" onclick="widocznosc(15);">Rzutowanie</a>
+<div class="slajd" style="display: none" id="s15">
+        <ul>
+          <li>
+            rzutowanie jest
+            <strong>jawną</strong>
+            informacją dla kompilatora, że ma wykonać konwersję (uwaga
+            na rzutowania zawężające!)
+          </li>
+          <li>
+            Składnia: typ w nawiasie przed wyrażeniem, uwaga na wysoki
+            priorytet tego operatora
+          </li>
+          <li>
+            Przykłady: <span class="kod">int x = 7; float w;</span>
+            <ul>
+              <li>
+                <span class="kod">w = x / 2</span>
+                // w == 2
+              </li>
+              <li>
+                <span class="kod">w = (float) x / 2</span>
+                // rzutowanie typu zmiennej (!) x, w == 3.5
+              </li>
+              <li>
+                <span class="kod">w = (float) (x / 3 )</span>
+                // rzutowanie wyniku, mała pułapka, w == 2
+              </li>
+              <li>
+                <span class="kod">w = x / 3.0</span>
+                // inny sposób dla tego przykładu, bez użycia konwersji w == 3.5
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+</div>
+</div>
+<div id="footer">
+						Notatki do wykładu: Języki programowania; Jakub
+						Neumann;
+          </div>
+</div>
+</body>
+</html>
