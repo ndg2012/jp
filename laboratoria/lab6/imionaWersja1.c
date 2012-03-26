@@ -1,5 +1,6 @@
 /*
- * Wersja II z dynamiczną alokacja pamieci z strncmp 
+ * Prymitywna wersja 
+ * strncmp 
  */
 #include <stdio.h>
 #include <string.h>
@@ -17,13 +18,7 @@ main (int argc, char *argv[])
   ull i, t;
 
   char wzorzec[] = "mate";
-  
-  char *tablica[ile];
-  /*
-   if(tablica == NULL)
-    printf("Error. Funk down");
-  */
-  //char tablica[ile][20]; 
+  char tablica[ile][20]; 
  
   for (i = 0; i < ile; i++)
     {
