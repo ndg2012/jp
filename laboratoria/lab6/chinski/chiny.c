@@ -52,7 +52,7 @@ int main(int argc, char *argv[]){
 
   usun_spacje(przed,po);
   printf("%i %s\n%i %s\n",(int)strlen(przed),przed,(int)strlen(po),po);
-  token(przed,po,slownik);
+  //token(przed,po,slownik);
   
   return 0;
 }
