@@ -18,6 +18,7 @@ void token(char *przed,char *po, char *slownik[]){
       if( max < strlen(slownik[i]))
 	max = i;
   }
+  
 
   /*
    * printf sprawdza powyższa petlę jej mankamentem jest to ze jeżeli 
