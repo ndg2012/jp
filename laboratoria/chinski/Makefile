@@ -1,10 +1,10 @@
 CFLAGS=-Wall -lm
 
-imiona: imiona.o
-	gcc imiona.o -o imiona
+chiny: chiny.o
+	gcc chiny.o -o chiny
 
-imiona.o: imiona.c
-	gcc -c imiona.c
+chiny.o: chiny.c
+	gcc -c chiny.c
 
 clean:
-	rm *.o *~ imiona
+	rm *.o *~ chiny
