@@ -1,58 +1,108 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
-void token(char *przed,char *po, char *slownik[]){
-  char temp;
-  int i;
-  int max = 0;
+char *word_pointer(char *tablica[], int i, char wskaznik);
+int word_int(char *tablica[], int i, char wskaznik);
+void usun_spacje(char *tekst, char *po);
+void sstr(char *string, int rozmiar);
 
 
-  temp = przed[2];
-  
-  /* wyszukiwanie najdłuższego słowa zaczynającego się na 
-   * podana litera, zmienna max zawiera ten element tablicy który jest najdłuższy
-   */
-  for(i = 0; i < 7; i++){
-    if( temp == slownik[i][0])
-      if( max < strlen(slownik[i]))
-	max = i;
-  }
-  
+int size = 7; // liczba słów w słowniku
 
-  /*
-   * printf sprawdza powyższa petlę jej mankamentem jest to ze jeżeli 
-   * nie znajdzie najdłuższego słowa na podaną litere to zwraca 
-   * pierwszy string z slownika
-   */
-  //printf("%s",slownik[max]);
+
+void token(char *chinskie, char *slownik[])
+{
+    extern int size;
+    int i;
+    int numer2;
+    int rozmiar;
+    
+    while (strlen(chinskie) > 1) {
+	char wskaznik = chinskie[0];
+	for (i = 0; i < size; i++) {
+	    numer2 = word_int(slownik, i, wskaznik);
+	    rozmiar = strlen(slownik[numer2]);
+	    if (!strncmp(chinskie, slownik[numer2], rozmiar)) {
+	      printf("%s ", slownik[numer2]);
+	      sstr(chinskie, rozmiar);
+	    }
+	}
+    }
+    puts("");
 }
 
-void usun_spacje(char *tekst, char *po){
-  int length = strlen(tekst);
-  int j;
-  int i = 0;
 
-  j = i;
-  for( i = 0 ; i < length; i++)
-    if( tekst[i] != ' '){
-      po[j] = tekst[i];      
-      j++;
-    } 
+int main(int argc, char *argv[])
+{
+
+    char *slownik[] =
+	{ "czekolady", "dasz", "jesli", "kakao", "krowie", "nie",
+	"wydoisz"
+    };
+    char *przed = "jesli krowie dasz kakao nie wydoisz czekolady";
+    char po[60];
+
+
+    usun_spacje(przed, po);
+
+    //printf("%i %s\n%i %s\n", (int) strlen(przed), przed, (int) strlen(po),po);
+    printf("%s\n%s\n",przed,po);
+    token(po, slownik);
+
+    //sstr(po,5);
+    //sstr(po,6);
+
+    //printf("%d\n", strspn(slownik[6], przed));
+    return 0;
 }
 
-int main(int argc, char *argv[]){
 
-  char *slownik[] = {"czekolady", "dasz", "jesli", "kakao", "krowie", "nie", "wydoisz"};
-  char *przed = "jesli krowie dasz kakao nie wydoisz czekolady";
-  char po[45];
-  //char temp[45];
+void sstr(char *string, int rozmiar)
+{
+    int i, j;
 
-  //printf("%i",strlen(przed));
+    char *temp = malloc(strlen(string) * sizeof(char) - rozmiar);
 
-  usun_spacje(przed,po);
-  printf("%i %s\n%i %s\n",(int)strlen(przed),przed,(int)strlen(po),po);
-  //token(przed,po,slownik);
-  
-  return 0;
+    for (i = rozmiar, j = 0; string[i] != '\0'; i++, j++) {
+	temp[j] = string[i];
+
+    }
+    temp[++j] = '\0';
+
+    strncpy(string,temp,strlen(temp)+1);
+
+}
+
+
+
+void usun_spacje(char *tekst, char *po)
+{
+    int length = strlen(tekst);
+    int j;
+    int i = 0;
+
+    j = i;
+    for (i = 0; i < length; i++)
+	if (tekst[i] != ' ') {
+	    po[j] = tekst[i];
+	    j++;
+	}
+}
+
+char *word_pointer(char *tablica[], int i, char wskaznik)
+{
+    if (tablica[i][0] == wskaznik)
+	return tablica[i];
+    else
+	return NULL;
+}
+
+int word_int(char *tablica[], int i, char wskaznik)
+{
+    if (tablica[i][0] == wskaznik)
+	return i;
+    else
+	return -1;
 }
