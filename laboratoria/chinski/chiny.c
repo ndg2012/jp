@@ -4,6 +4,7 @@
 #include <stdbool.h>
 
 int size = 9;
+char tablica[100];
 
 int word_int(char *tablica[], int i, char wskaznik);
 void usun_spacje(char *tekst, char *po);
@@ -22,6 +23,8 @@ void token(char *chinskie, char *slownik[])
 	    numer2 = word_int(slownik, i, wskaznik);
 	    rozmiar = strlen(slownik[numer2]);
 	    if (!strncmp(chinskie, slownik[numer2], rozmiar)) {
+	      //  strcpy(tablica,slownik[numer2]);
+	      //  strcpy(tablica," ");
 	      printf("%s ", slownik[numer2]);
 	      sstr(chinskie, rozmiar);
 	    }
@@ -46,8 +49,8 @@ int main(int argc, char *argv[])
 
     printf("%s\n%s\n",przed,po);
     token(po, slownik);
-
-
+    //	puts(tablica);
+    printf("%s",tablica);
     return 0;
 }
 
