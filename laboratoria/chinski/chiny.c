@@ -3,13 +3,11 @@
 #include <string.h>
 #include <stdbool.h>
 
-char *word_pointer(char *tablica[], int i, char wskaznik);
+int size = 9;
+
 int word_int(char *tablica[], int i, char wskaznik);
 void usun_spacje(char *tekst, char *po);
 void sstr(char *string, int rozmiar);
-
-
-int size = 9; 
 
 void token(char *chinskie, char *slownik[])
 {
@@ -57,20 +55,20 @@ int main(int argc, char *argv[])
 void sstr(char *string, int rozmiar)
 {
     int i, j;
-
-    char *temp = malloc(strlen(string) * sizeof(char));
+    char temp[100];
+    //char *temp = malloc(strlen(string) * sizeof(char));
 
     for (i = rozmiar, j = 0; string[i] != '\0'; i++, j++) {
 	temp[j] = string[i];
 
     }
-    temp[++j] = '\0';
+    temp[j] = '\0';
 
-    strncpy(string,temp,strlen(temp)+1);
+    strcpy(string,temp);
 
-    /*
-    free(temp);
-    */
+    
+    // free(temp);
+    
 }
 
 
@@ -87,14 +85,6 @@ void usun_spacje(char *tekst, char *po)
 	    po[j] = tekst[i];
 	    j++;
 	}
-}
-
-char *word_pointer(char *tablica[], int i, char wskaznik)
-{
-    if (tablica[i][0] == wskaznik)
-	return tablica[i];
-    else
-	return NULL;
 }
 
 int word_int(char *tablica[], int i, char wskaznik)
