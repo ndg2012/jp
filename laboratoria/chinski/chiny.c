@@ -9,7 +9,7 @@ void usun_spacje(char *tekst, char *po);
 void sstr(char *string, int rozmiar);
 
 
-int size = 7; // liczba słów w słowniku
+int size = 9; // liczba słów w słowniku
 
 
 void token(char *chinskie, char *slownik[])
@@ -39,9 +39,9 @@ int main(int argc, char *argv[])
 
     char *slownik[] =
 	{ "czekolady", "dasz", "jesli", "kakao", "krowie", "nie",
-	"wydoisz"
+	  "wydoisz", "ani", "mleka"
     };
-    char *przed = "jesli krowie dasz kakao nie wydoisz czekolady";
+    char *przed = "jesli krowie dasz kakao nie wydoisz czekolady ani mleka";
     char po[60];
 
 
