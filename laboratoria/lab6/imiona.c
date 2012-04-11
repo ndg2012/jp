@@ -6,19 +6,11 @@ main (int argc, char *argv[])
 {
   char tablica[20];
 
-  while (scanf ("%s", &tablica) == 1)
-    if (!strncmp (tablica, argv[1], strlen (argv[1])))
-      printf ("%s\n", tablica);
-  unsigned int i;
-
-  char tablica[20];
-
   while (scanf ("%s", tablica) == 1)
     {
       if (!strncmp (tablica, argv[1], strlen (argv[1])))
 	printf ("%s\n", tablica);
     }
-
 
   return 0;
 }
