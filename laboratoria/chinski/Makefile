@@ -1,4 +1,4 @@
-CFLAGS=-Wall -lm
+CFLAGS=-Wall -lm -std=c99
 
 chiny: chiny.o
 	gcc chiny.o -o chiny

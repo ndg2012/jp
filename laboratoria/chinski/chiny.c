@@ -9,8 +9,7 @@ void usun_spacje(char *tekst, char *po);
 void sstr(char *string, int rozmiar);
 
 
-int size = 9; // liczba słów w słowniku
-
+int size = 9; 
 
 void token(char *chinskie, char *slownik[])
 {
@@ -42,19 +41,15 @@ int main(int argc, char *argv[])
 	  "wydoisz", "ani", "mleka"
     };
     char *przed = "jesli krowie dasz kakao nie wydoisz czekolady ani mleka";
-    char po[60];
+    char po[100];
 
 
     usun_spacje(przed, po);
 
-    //printf("%i %s\n%i %s\n", (int) strlen(przed), przed, (int) strlen(po),po);
     printf("%s\n%s\n",przed,po);
     token(po, slownik);
 
-    //sstr(po,5);
-    //sstr(po,6);
 
-    //printf("%d\n", strspn(slownik[6], przed));
     return 0;
 }
 
@@ -63,7 +58,7 @@ void sstr(char *string, int rozmiar)
 {
     int i, j;
 
-    char *temp = malloc(strlen(string) * sizeof(char) - rozmiar);
+    char *temp = malloc(strlen(string) * sizeof(char));
 
     for (i = rozmiar, j = 0; string[i] != '\0'; i++, j++) {
 	temp[j] = string[i];
@@ -73,6 +68,9 @@ void sstr(char *string, int rozmiar)
 
     strncpy(string,temp,strlen(temp)+1);
 
+    /*
+    free(temp);
+    */
 }
 
 
