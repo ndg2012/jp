@@ -2,51 +2,42 @@
 #include <stdlib.h>
 #include <string.h>
 
-int size = 0;
-int* ps = &size;
 
+int size = 9; // argv jest chyba globalny ? 
 
 void usun_spacje(char *zdanie);
 void skroc_lancuch(char *zdanie, int rozmiar);
-void tlumacz_zdanie(char *chinskie, char **slownik);
+void tlumacz_zdanie(char *chinskie, char *slownik[]);
 void wypisz_zdanie(char *zdanie);
-
-void pobierz_slownik(char **slownik)
-{
-    int i = 0;
-    char temp[15];
-    extern int size;
-
-    while (scanf("%s", temp) == 1) {
-	slownik[i] = (char *) malloc(15 * sizeof(char));
-	strcpy(slownik[i], temp);
-	i++;
-	if (i == size)
-	    break;
-    }
-
-}
+void pobierz_slownik(char *slownik[]);
 
 
 int main(int argc, char *argv[])
 {
-    char string[100] = { '\0' };
+  /*
+   * dodac dynamiczna alokacje dla slownika
+   * wielkosc bedzie pobierana z argv[1]
+   * pomocna bedzie funcka atoi
+   */
+    char *slownik[9];
     extern int size;
-    if (argc < 3 ) {
+
+
+    if (argc < 3) {
 	fprintf(stderr,
-		"cat slownik.txt | %s \"jesli krowie dasz kakao nie wydoisz czekolady ani mleka\" \n",
-		argv[0]);
+		"cat slownik.txt | %s \"jesli krowie dasz kakao nie wydoisz czekolady ani mleka\" \n",argv[0]);
 	exit(1);
     } else {
-      char* slownik = malloc(atoi(argv[1])*sizeof(char*));
-	pobierz_slownik(&slownik);
-	strcpy(string, argv[2]);
-	usun_spacje(string);
-	wypisz_zdanie(string);
-	tlumacz_zdanie(string, &slownik);
+	pobierz_slownik(slownik);
 
-	if (string[0] != '\0')
-	    wypisz_zdanie(string);
+	usun_spacje(argv[2]);
+
+	wypisz_zdanie(argv[2]);
+
+	tlumacz_zdanie(argv[2], slownik);
+
+	if (argv[2][0] != '\0')
+	    wypisz_zdanie(argv[2]);
 	else
 	    fprintf(stderr,
 		    "Error. Nie znaleziono pierwszego slowa w słowniku.\n");
@@ -82,10 +73,10 @@ void usun_spacje(char *zdanie)
     strcpy(zdanie, temp);
 }
 
-void tlumacz_zdanie(char *chinskie, char **slownik)
+void tlumacz_zdanie(char *chinskie, char *slownik[])
 {
     extern int size;
-    int i, j = 1;;
+    int i;
     int numer;
     int rozmiar;
     int dlugosc;
@@ -102,15 +93,23 @@ void tlumacz_zdanie(char *chinskie, char **slownik)
 		    strcat(tablica, " ");
 		    skroc_lancuch(chinskie, rozmiar);
 		}
-	    } else {
-		j++;
+	    } else
 		continue;
-	    }
 
 	}
-	if ((j == size) || (j - 1 == size)) {
+	/*
+	 * problem jest gdy ciągle powstarzaja sie te same slowo
+	 * ex. krowa kako nie nie nie nie nie nie 
+	 * w tym przypadku zostanie wydrukowane pierwsze nie nastepne
+	 * zostana pominiete
+	 * musze wymylic lepszy sposób ;]
+	 */
+	if (wskaznik == chinskie[0] ) {
+	    fprintf(stderr,
+		    "Error. Wybacz ale nie znalazłem >= 1 slowa.\n");
 	    break;
 	}
+
     }
     tablica[strlen(tablica) - 1] = '\0';
     strcpy(chinskie, tablica);
@@ -119,4 +118,19 @@ void tlumacz_zdanie(char *chinskie, char **slownik)
 void wypisz_zdanie(char *zdanie)
 {
     printf("%s\n", zdanie);
+}
+
+void pobierz_slownik(char *slownik[])
+{
+    int i = 0;
+    char temp[15];
+    extern int size;
+
+    while (scanf("%s", temp) == 1) {
+	slownik[i] = (char *) malloc(15 * sizeof(char));
+	strcpy(slownik[i], temp);
+	i++;
+	if (i == size)
+	    break;
+    }
 }
