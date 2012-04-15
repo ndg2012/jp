@@ -1,53 +1,55 @@
-/*
- * TODO: napis obsługe sytuacji gdy nie ma danego slowa w słowniku ...
- *       dynamiczna alokacja pamieci ... :]
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int size = 9;			// ilosc slow w slowniku
+int size = 0;
+int* ps = &size;
+
 
 void usun_spacje(char *zdanie);
 void skroc_lancuch(char *zdanie, int rozmiar);
-void tlumacz_zdanie(char *chinskie, char *slownik[]);
+void tlumacz_zdanie(char *chinskie, char **slownik);
+void wypisz_zdanie(char *zdanie);
 
-void pobierz_slownik(char *slownik[])
+void pobierz_slownik(char **slownik)
 {
-  int i = 0;
-  char temp[15];
-  extern int size;
-  
-  while(scanf("%s",temp) == 1){
-    slownik[i] = (char *)malloc(15*sizeof(char));
-    strcpy(slownik[i],temp);
-    i++;
-    if(i == size)
-      break;
-  }
-    
+    int i = 0;
+    char temp[15];
+    extern int size;
+
+    while (scanf("%s", temp) == 1) {
+	slownik[i] = (char *) malloc(15 * sizeof(char));
+	strcpy(slownik[i], temp);
+	i++;
+	if (i == size)
+	    break;
+    }
+
 }
 
-void wypisz_zdanie(char *zdanie)
-{
-    printf("%s\n", zdanie);
-}
 
 int main(int argc, char *argv[])
 {
-    char* slownik[9];
     char string[100] = { '\0' };
-    
-    if (argc == 1) {
-	fprintf(stderr,"usage: cat slownik.txt | %s \"what jesus blatantly fails to  appreciate is that it is the meek who are the problem\" \n",argv[0]);
+    extern int size;
+    if (argc < 3 ) {
+	fprintf(stderr,
+		"cat slownik.txt | %s \"jesli krowie dasz kakao nie wydoisz czekolady ani mleka\" \n",
+		argv[0]);
 	exit(1);
     } else {
-        pobierz_slownik(slownik);
-	strcpy(string, argv[1]);
+      char* slownik = malloc(atoi(argv[1])*sizeof(char*));
+	pobierz_slownik(&slownik);
+	strcpy(string, argv[2]);
 	usun_spacje(string);
 	wypisz_zdanie(string);
-	tlumacz_zdanie(string, slownik);
-	wypisz_zdanie(string);
+	tlumacz_zdanie(string, &slownik);
+
+	if (string[0] != '\0')
+	    wypisz_zdanie(string);
+	else
+	    fprintf(stderr,
+		    "Error. Nie znaleziono pierwszego slowa w słowniku.\n");
     }
 
     return 0;
@@ -80,15 +82,16 @@ void usun_spacje(char *zdanie)
     strcpy(zdanie, temp);
 }
 
-void tlumacz_zdanie(char *chinskie, char *slownik[])
+void tlumacz_zdanie(char *chinskie, char **slownik)
 {
     extern int size;
-    int i;
+    int i, j = 1;;
     int numer;
     int rozmiar;
+    int dlugosc;
     char tablica[100] = { '\0' };
 
-    while ((int) strlen(chinskie) > 1) {
+    while ((dlugosc = strlen(chinskie)) > 1) {
 	char wskaznik = chinskie[0];
 	for (i = 0; i < size; i++) {
 	    if (slownik[i][0] == wskaznik) {
@@ -99,10 +102,21 @@ void tlumacz_zdanie(char *chinskie, char *slownik[])
 		    strcat(tablica, " ");
 		    skroc_lancuch(chinskie, rozmiar);
 		}
-	    } else
+	    } else {
+		j++;
 		continue;
+	    }
+
+	}
+	if ((j == size) || (j - 1 == size)) {
+	    break;
 	}
     }
     tablica[strlen(tablica) - 1] = '\0';
     strcpy(chinskie, tablica);
+}
+
+void wypisz_zdanie(char *zdanie)
+{
+    printf("%s\n", zdanie);
 }

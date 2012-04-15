@@ -1,34 +1,31 @@
-/*
- * Prymitywna wersja 
- * strncmp 
- */
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <string.h>
 
-typedef unsigned long long ull;
-
-const int ile = 4960;
-
-
-int
-main (int argc, char *argv[])
+int main (int argc, char *argv[])
 {
-  ull i, t;
+  if(argc == 1){
+    fprintf(stderr,"Error. Źle wywołany program\n");
+    exit(1);
+  }
+  else{
+    char *tablica =(char*) malloc(atoi(argv[1])*sizeof(char*));
+    printf("%i - %s\n",atoi(argv[1]),argv[2]);
+    char temp[20];
+    
+    int i = 0;
+    while(scanf("%s",temp) == 1){
+      tablica[i] = (char)malloc(20*sizeof(char));
+      strcpy(tablica[i],temp);
+      i++;
+    }
 
-  char wzorzec[] = "ki";
-  char tablica[ile][20];
+    for(i = 0 ; i < atoi(argv[1]); i++){
+	if (!strncmp (tablica[i], argv[2], strlen (argv[2])))
+	  printf ("%s\n", tablica);
+      }
 
-  for (i = 0; i < ile; i++)
-    scanf ("%s", &tablica[i]);
-
-
-  for (i = 0; i < ile; i++)
-    if (!strncmp (tablica[i], wzorzec, strlen (wzorzec)))
-      printf ("%s\n", tablica[i]);
-
-
+  }
 
   return 0;
 }
