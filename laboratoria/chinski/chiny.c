@@ -3,7 +3,8 @@
 #include <string.h>
 
 
-int size = 9; // argv jest chyba globalny ? 
+int size = 0;
+int* ps = &size;
 
 void usun_spacje(char *zdanie);
 void skroc_lancuch(char *zdanie, int rozmiar);
@@ -19,11 +20,13 @@ int main(int argc, char *argv[])
    * wielkosc bedzie pobierana z argv[1]
    * pomocna bedzie funcka atoi
    */
-    char *slownik[9];
-    extern int size;
+   *ps = atoi(argv[1]);
+  extern int size;
+    char *slownik[size];
+   
 
 
-    if (argc < 3) {
+    if (argc <= 2) {
 	fprintf(stderr,
 		"cat slownik.txt | %s \"jesli krowie dasz kakao nie wydoisz czekolady ani mleka\" \n",argv[0]);
 	exit(1);
