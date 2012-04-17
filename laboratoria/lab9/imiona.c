@@ -16,6 +16,8 @@ int main(int argc, char* argv[]){
   size = pobierz_imiona(slownik);
 
   printf("Wczytano %d imion\n",size);
+  
+  printf("Podaj prefiks:  ");
 
   podaj_prefiks(prefiks);
 
@@ -39,7 +41,6 @@ int pobierz_imiona(char *slownik[]){
 
 }
 void podaj_prefiks(char *prefiks){
-  printf("Podaj prefiks:  ");
   scanf("%s",prefiks);
 }
 void wypisz_imiona(char* slownik[], char* prefiks, int ilosc_wczytanych){
