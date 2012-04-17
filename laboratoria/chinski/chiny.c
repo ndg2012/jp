@@ -2,9 +2,40 @@
 #include <stdlib.h>
 #include <string.h>
 
+int size = 9; // wc -l; usuniecie grozi SIGSEGV ;)
+                  // dla size = 45402 bład ?
 
-int size = 0;
-int* ps = &size;
+/*
+the problems in this round are somewhat easier than
+somewhat == some i what albo somewhat
+
+slownik 1:
+
+the
+problems
+in
+this
+round
+are
+somewhat
+easier
+than
+
+
+jesli krowie dasz kakao nie wydoisz czekolady ani mleka
+slownik 2:
+ani
+czekolady
+dasz
+jesli
+kakao
+krowie
+nie
+mleka
+wydoisz
+
+
+ */
 
 void usun_spacje(char *zdanie);
 void skroc_lancuch(char *zdanie, int rozmiar);
@@ -15,36 +46,30 @@ void pobierz_slownik(char *slownik[]);
 
 int main(int argc, char *argv[])
 {
-  /*
-   * dodac dynamiczna alokacje dla slownika
-   * wielkosc bedzie pobierana z argv[1]
-   * pomocna bedzie funcka atoi
-   */
-   *ps = atoi(argv[1]);
   extern int size;
     char *slownik[size];
-   
 
-
-    if (argc <= 2) {
+    
+     if (argc <= 1) {
 	fprintf(stderr,
-		"cat slownik.txt | %s \"jesli krowie dasz kakao nie wydoisz czekolady ani mleka\" \n",argv[0]);
+		"cat slownik.txt | %s \"zdanie\" \n",argv[0]);
 	exit(1);
     } else {
-	pobierz_slownik(slownik);
+  
+    	pobierz_slownik(slownik);
 
-	usun_spacje(argv[2]);
+	usun_spacje(argv[1]);
 
-	wypisz_zdanie(argv[2]);
+	wypisz_zdanie(argv[1]);
 
-	tlumacz_zdanie(argv[2], slownik);
+	tlumacz_zdanie(argv[1], slownik);
 
-	if (argv[2][0] != '\0')
-	    wypisz_zdanie(argv[2]);
+	if (argv[1][0] != '\0')
+	    wypisz_zdanie(argv[1]);
 	else
 	    fprintf(stderr,
 		    "Error. Nie znaleziono pierwszego slowa w słowniku.\n");
-    }
+	 }
 
     return 0;
 }
@@ -100,13 +125,6 @@ void tlumacz_zdanie(char *chinskie, char *slownik[])
 		continue;
 
 	}
-	/*
-	 * problem jest gdy ciągle powstarzaja sie te same slowo
-	 * ex. krowa kako nie nie nie nie nie nie 
-	 * w tym przypadku zostanie wydrukowane pierwsze nie nastepne
-	 * zostana pominiete
-	 * musze wymylic lepszy sposób ;]
-	 */
 	if (wskaznik == chinskie[0] ) {
 	    fprintf(stderr,
 		    "Error. Wybacz ale nie znalazłem >= 1 slowa.\n");
@@ -130,7 +148,7 @@ void pobierz_slownik(char *slownik[])
     extern int size;
 
     while (scanf("%s", temp) == 1) {
-	slownik[i] = (char *) malloc(15 * sizeof(char));
+	slownik[i] = (char *) malloc(25 * sizeof(char));
 	strcpy(slownik[i], temp);
 	i++;
 	if (i == size)
