@@ -1,10 +1,16 @@
-CFLAGS=-Wall -lm -std=c99
+CFLAGS=-D_GNU_SOURCE -Wall -lm -std=c99 -g
+
+chiny2: chiny2.o
+	$(CC) chiny2.o -o chiny2
+
+chiny2.o: chiny2.c
+	$(CC) $(CFLAGS) -c chiny2.c
 
 chiny: chiny.o
-	gcc chiny.o -o chiny
+	$(CC) chiny.o -o chiny
 
 chiny.o: chiny.c
-	gcc $(CFLAGS) -c chiny.c
+	$(CC) $(CFLAGS) -c chiny.c
 
 clean:
-	rm *.o *~ chiny
+	rm -f *.o *~ chiny chiny2

@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
   char **slownik = malloc(MAX_WORDS * sizeof(char *));
 
   if (argc <= 1) {
-    fprintf(stderr, "cat /usr/share/dict/words | %s \"zdanie\" \n", argv[0]);
+    fprintf(stderr, "cat slownik.txt | %s \"zdanie\" \n", argv[0]);
     exit(1);
   } else {
     pobierz_slownik(slownik, &size);
