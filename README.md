@@ -1,6 +1,8 @@
 Języki programowania
 ====================
 
+## dodaj issues (WB)
+
 Strona została stworzona w celu udostępniania rozwiązań problemów rozważanych w ramach przedmiotu - *Języki programowania*.
 
 Legeda
@@ -14,4 +16,4 @@ Licencja
 --------
 Jeżeli chcesz wykorzystać mój kod to zastanów się dwa razy i napisz do mnie.
 Pozostałe komponenty są na licencji ich właścicieli.
- 
+
