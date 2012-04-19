@@ -1,8 +1,6 @@
 Języki programowania
 ====================
 
-## dodaj issues (WB)
-
 Strona została stworzona w celu udostępniania rozwiązań problemów rozważanych w ramach przedmiotu - *Języki programowania*.
 
 Legeda
