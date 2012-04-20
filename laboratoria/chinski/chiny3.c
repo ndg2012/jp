@@ -23,7 +23,11 @@ int main(int argc, char *argv[]) {
       fprintf(stderr,"Error. Za długi łańcuch.\n");
       exit(2);
     } else {
-      zdanie = argv[1];
+      zdanie = strdup(argv[1]);
+      /*
+	bez strdup, czyli gdy zdanie = argv[1] oraz przy korzystaniu
+	z realloc powstaje bład
+      */
       pobierz_slownik(slownik, &size);
     }
   }
@@ -31,17 +35,16 @@ int main(int argc, char *argv[]) {
   usun_spacje(zdanie);    /* testowanie */
   wypisz_zdanie(zdanie);  /* testowanie */
   
-  printf("przed tz - %p\n",zdanie);
+  //  printf("przed tz - %p\n",zdanie);
   
   tlumacz_zdanie(zdanie, slownik, size);
 
-  printf("za tz - %p\n",zdanie);
+  // printf("za tz - %p\n",zdanie);
 
-  // if (zdanie[0] != '\0')
-
-  printf("%s\n",zdanie);
-    // else
-    //  fprintf(stderr, "Error. Nie znaleziono pierwszego slowa w słowniku.\n");
+  if (zdanie[0] != '\0')
+    wypisz_zdanie(zdanie);
+  else
+    fprintf(stderr, "Error. Nie znaleziono pierwszego slowa w słowniku.\n");
 
   free(slownik);
   
@@ -90,31 +93,36 @@ void skroc_lancuch (char *zdanie, int rozmiar) {
 
 void tlumacz_zdanie (char *chinskie, char **slownik, int size) {
   int i;
-  int numer;
+  int max = 0;
   int rozmiar;
   char tablica[512] = { '\0' };
-  
+  void *testowy;
+  int pozycja = 0;
+   
   while (strlen(chinskie) > 1) {
     char wskaznik = chinskie[0];
     for (i = 0; i < size; i++) {
       if (slownik[i][0] == wskaznik) {
-        numer = i;
-        rozmiar = strlen(slownik[numer]);
-        if (!strncmp(chinskie, slownik[numer], rozmiar)) {
-          strcat(tablica, slownik[numer]);
-          strcat(tablica, " ");
-          skroc_lancuch(chinskie, rozmiar);
+        rozmiar = strlen(slownik[i]);
+        if (!strncmp(chinskie, slownik[i], rozmiar)) {
+	  if( rozmiar > max ) {
+	    max = rozmiar;
+	    pozycja = i;
+	  }
         }
-      } else
+      } else {
         continue;
-    }/*
-    if (wskaznik == chinskie[0]) {
-      fprintf(stderr, "Error. Wybacz ale nie znalazłem >= 1 slowa.\n");
-      break;
-      }*/
+      }
+    }
+    strcat(tablica, slownik[pozycja]);
+    strcat(tablica, " ");
+    skroc_lancuch(chinskie, max);
+    max = 0;
+    pozycja = 0;
   }
   tablica[strlen(tablica) - 1] = '\0';
 
+  /*
   fprintf(stdout,"w tz - %p\n",chinskie);
 
   chinskie = strdup(tablica);
@@ -123,18 +131,19 @@ void tlumacz_zdanie (char *chinskie, char **slownik, int size) {
     fprintf(stderr,"strdup\n");
   }
   fprintf(stdout,"w tz, po strdup - %p\n",chinskie);
+  */
+
   
-  /*
-  testowy = realloc(chinskie,strlen(tablica)*sizeof(char));
+  testowy = (char*)realloc(chinskie,strlen(tablica)*sizeof(char));
   
   if(testowy == NULL){
     fprintf(stderr,"Reallokacja nieudana\n");
   } else {
     chinskie = testowy;
   }
+
   free(testowy);
   
   strcpy(chinskie, tablica);
-  */
  
 }

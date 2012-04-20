@@ -3,6 +3,7 @@ czekolady
 dasz
 jesli
 kakao
+kro
 krowie
 nie
 mleka
