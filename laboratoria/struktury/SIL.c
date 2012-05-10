@@ -32,7 +32,7 @@ int main(void){
     else if((a.ld.x <= b.ld.x && b.pg.x <= a.pg.x) || (b.ld.x <= a.ld.x && a.pg.x <= b.pg.x))
       printf("%d\n",area(a) > area(b) ? area(a) : area(b));
     else
-      printf("%d %d %d %d %d %d\n",area(a),area(b),da,db,a.pg.x,b.ld.x);
+      printf("%d\n",area(a)+area(b)-da*db);
 
   }
 
