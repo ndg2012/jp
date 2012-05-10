@@ -25,7 +25,7 @@ int main(void){
 
     da = abs(a.pg.x - b.ld.x);
     db = abs(b.pg.y - a.ld.y);
-    
+
   
     if(a.pg.x < b.ld.x || b.pg.x < a.ld.x)
       printf("%d\n",area(a)+area(b));
@@ -33,8 +33,7 @@ int main(void){
       printf("%d\n",area(a) > area(b) ? area(a) : area(b));
     else
       printf("%d %d %d %d %d %d\n",area(a),area(b),da,db,a.pg.x,b.ld.x);
-
-  }
+   }
 
   return 0;
 }

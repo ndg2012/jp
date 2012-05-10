@@ -7,7 +7,6 @@
 void pobierz_slownik(char *slownik[], int *size);
 void usun_spacje(char *zdanie);
 void wypisz_zdanie(char *zdanie);
-
 void tlumacz_zdanie(char *chinskie, char **slownik, int size);
 
 int main(int argc, char *argv[]) {
