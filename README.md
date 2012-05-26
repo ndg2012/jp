@@ -12,6 +12,8 @@ Legeda
 
 Linki
 -----
+Ćwiczenia:
+* [dr W. Bzyl]()
 Narzędzia:
 * [GCC online documentation](http://gcc.gnu.org/onlinedocs/)
 * [GNU Make](http://www.gnu.org/software/make/)
