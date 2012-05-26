@@ -14,6 +14,7 @@ Linki
 -----
 Ćwiczenia:
 * [dr W. Bzyl](http://wbzyl.inf.ug.edu.pl/c/)
+
 Narzędzia:
 * [GCC online documentation](http://gcc.gnu.org/onlinedocs/)
 * [GNU Make](http://www.gnu.org/software/make/)
